@@ -29,7 +29,7 @@ export default class Address extends Model<InferAttributes<Address>, InferCreati
   });
 
 
-  export interface t extends Attributes<Address> {
+              export interface t extends Attributes<Address> {
   }
 
 
