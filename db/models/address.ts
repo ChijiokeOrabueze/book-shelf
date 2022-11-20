@@ -26,11 +26,14 @@ export default class Address extends Model<InferAttributes<Address>, InferCreati
   }, {
     sequelize: db.sequelize,
     modelName: 'Address',
-  });
+  })
+
+
+  
 
 
               export interface t extends Attributes<Address> {
-  }
+        }
 
 
 Address.belongsTo(User, { targetKey: 'id' });
