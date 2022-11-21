@@ -1,12 +1,12 @@
-'use strict';
-
-const fs = require('fs');
-const path = require('path');
-import { Dialect, Sequelize } from "sequelize";
-// const process = require('process');
-const basename = path.basename(__filename);
-const env: 'development' | 'test' | 'production' = process.env.NODE_ENV as 'development' | 'test' | 'production' || 'development';
+import { Dialect, Sequelize } from 'sequelize';
 import config from '../../config/database';
+
+// const fs = require('fs');
+// const path = require('path');
+// const process = require('process');
+// const basename = path.basename(__filename);
+const env: 'development' | 'test' | 'production' =
+    (process.env.NODE_ENV as 'development' | 'test' | 'production') ?? 'development';
 
 // console.log(__dirname);
 // type Db = {
@@ -17,18 +17,19 @@ import config from '../../config/database';
 // const db:any = {
 // };
 
-let sequelize:Sequelize = new Sequelize(
-  config[env].database,
-  config[env].username, 
-  config[env].password,
-  {
-    dialect: config[env].dialect as Dialect
-  });
+const sequelize: Sequelize = new Sequelize(
+    config[env].database,
+    config[env].username,
+    config[env].password,
+    {
+        dialect: config[env].dialect as Dialect,
+    },
+);
 
 const db = {
     sequelize,
-    Sequelize
-  }
+    Sequelize,
+};
 
 // fs
 //   .readdirSync(__dirname)
@@ -38,7 +39,7 @@ const db = {
 //   .forEach((file:string) => {
 //     console.log(path.join(__dirname, file));
 //     const model = require(path.join(__dirname, file))
-//     // import model from 
+//     // import model from
 //     // db[model.name] = model;
 //     console.log(db);
 //     // console.log(typeof db);
@@ -50,7 +51,5 @@ const db = {
 //     db[modelName].associate(db);
 //   }
 // });
-
-
 
 export default db;

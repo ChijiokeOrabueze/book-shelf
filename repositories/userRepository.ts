@@ -1,17 +1,13 @@
-import Repo from "./repo";
-import db from "../db/models";
-import { Model, ModelStatic } from "sequelize";
-
-const y = db.User as Model;
-const h = db.sequelize?.models.user as ModelStatic<typeof y>;
+import Repo from './repo';
+import User from '../db/models/user';
 
 
 
-
-class UserRepository extends Repo{
-
+class UserRepository extends Repo<User> {
     constructor() {
-        super(h)
+        super(User);
     }
-
 }
+
+
+export default UserRepository;

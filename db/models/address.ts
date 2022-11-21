@@ -1,40 +1,48 @@
-'use strict';
-
 import {
-  Model, Sequelize, 
-  DataTypes, InferAttributes, 
-  InferCreationAttributes, ModelStatic,
-  Attributes,
-  Association,
-  ForeignKey} from 'sequelize';
+    Model,
+    DataTypes,
+    InferAttributes,
+    InferCreationAttributes,
+    Attributes,
+    ForeignKey,
+    CreationAttributes,
+    CreationOptional,
+} from 'sequelize';
 
-import db from "./index"
+import db from './index';
 import User from './user';
 
+class Address extends Model<InferAttributes<Address>, InferCreationAttributes<Address>> {
 
-
-
-export default class Address extends Model<InferAttributes<Address>, InferCreationAttributes<Address>> {
-
+    declare id: CreationOptional<number>;
     declare street: string;
-    declare userId: ForeignKey<User>
+    declare userId: ForeignKey<User['id']>;
+}
 
-    }
-
-  Address.init({
-    street: DataTypes.STRING
-  }, {
-    sequelize: db.sequelize,
-    modelName: 'Address',
-  })
-
-
-  
-
-
-              export interface t extends Attributes<Address> {
+Address.init(
+    {
+        id: {
+            type: DataTypes.BIGINT,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false
+        },
+        street: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
-
+    },
+    {
+        sequelize: db.sequelize,
+        modelName: 'Address',
+    },
+);
 
 Address.belongsTo(User, { targetKey: 'id' });
 User.hasOne(Address, { sourceKey: 'id' });
+
+export type AddressDto = CreationAttributes<Address>;
+export type AddressDro = Attributes<Address>;
+
+
+export default Address;
