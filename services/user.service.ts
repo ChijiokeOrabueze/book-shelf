@@ -1,9 +1,14 @@
 import User, { UserDto } from "../db/models/user";
 import UserRepository from "../repositories/userRepository";
 
-interface IUserService {
-    create: (data: UserDto) => Promise<User>;
+export interface Hello extends Omit<UserDto, "id"> {
+
 }
+
+interface IUserService {
+    create: (data: Hello) => Promise<User>;
+}
+
 
 class UserService implements IUserService {
 
@@ -14,10 +19,11 @@ class UserService implements IUserService {
 
     }
 
-    async create(data: UserDto) {
+
+
+    async create(data: Hello) {
 
         try {
-
             const result = await this.userRepository.create(data);
 
             return result;
